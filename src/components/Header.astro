@@ -1,0 +1,18 @@
+---
+import "../styles/style.css"
+import Navigation from "./Navigation.astro"
+import ThemeIcon from "./ThemeIcon.astro"
+---
+<div id="main-menu" class="nav-links">
+    <div>
+        <ThemeIcon />
+    </div>
+    <Navigation />
+</div>
+
+<style>
+  div {
+    display: flex;
+    justify-content: space-between;
+  }
+</style>

@@ -1,0 +1,60 @@
+---
+import BlogPosts from "../components/BlogPosts.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+const pageTitle = "Blog";
+const allposts = Object.values(
+    import.meta.glob("../pages/posts/*.md", { eager: true }),
+);
+const tags = [
+    ...new Set(allposts.map((post: any) => post.frontmatter.tags).flat()),
+];
+---
+
+<BaseLayout pageTitle={pageTitle} `>
+    <div class="tags">
+        {
+            tags.map((tag) => (
+                <p class="tag">
+                    <a href={`/tags/${tag}`}>{tag}</a>
+                </p>
+            ))
+        }
+    </div>
+    {
+        allposts.map((post: any) => (
+            <BlogPosts
+                title={post.frontmatter.title}
+                url={post.url}
+                href={post.url}
+                date={new Date(post.frontmatter.pubDate)}
+                author={post.frontmatter.author}
+                image={post.frontmatter.image}
+                tags={post.frontmatter.tags}
+            />
+        ))
+    }
+</BaseLayout>
+
+<script>
+    import "../script/fetchData.ts";
+</script>
+
+<style>
+  a {
+    color: #00539F;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    margin: 0.25em;
+    border: dotted 1px #a1a1a1;
+    border-radius: .5em;
+    padding: .5em 1em;
+    font-size: 1.15em;
+    background-color: #F8FCFD;
+  }
+</style>

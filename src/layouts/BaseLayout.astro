@@ -1,0 +1,22 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Menu from '../components/Menu.astro';
+const pageTitle = Astro.props.pageTitle;
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <Header />
+    <Menu />
+    <slot />
+    <Footer />
+    <script>
+      import "../script/menu.js";
+    </script>
+  </body>
+</html>
